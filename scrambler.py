@@ -48,3 +48,18 @@ def main() :
         required=True,
         help="The text that will be used as context for question generation.",
     )
+    
+    args = parser.parse_args()
+
+    with open(args.text_dir, 'r') as file:
+        text_file = file.read()
+
+    sent_list = sent_tokenize(text_file)
+    for i in range(len(sent_list)) :
+        print(i, "th ====> ",sent_list[i])
+
+    find_sentences_place(sent_list)
+
+if __name__ == "__main__":
+    main()
+
