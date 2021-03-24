@@ -34,7 +34,7 @@ def find_sentences_place(sentences):
     print('\n===================================================\n')
     print('In which of the positions marked [1],[2],[3] and [4] \ndoes the following sentence best belong?')
     print('\n\n"', target, target_sent , '"\n')
-    print('(A) [1]\n(B) [2]\n(C) [3]\n(D) [4]')
+    print('(A) [1]\n(B) [2]\n(C) [3]\n(D) [4]\n')
     print('\n\nAnswer =>', target)
 
 def main() : 
