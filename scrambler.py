@@ -2,11 +2,6 @@ from nltk.tokenize import sent_tokenize
 import argparse
 from random import randint
 
-def sentence_scramble(sentences):
-    numofsent = len(sentences)
-    first_sent = sentences[0]
-    print("First = ", first_sent)
-    tmp = ''
 
 def find_sentences_place(sentences):
     numofsent = len(sentences)
@@ -36,6 +31,13 @@ def find_sentences_place(sentences):
     print('\n\n"', target, target_sent , '"\n')
     print('(A) [1]\n(B) [2]\n(C) [3]\n(D) [4]\n')
     print('\n\nAnswer =>', target)
+
+def sentence_scramble(sentences):
+    numofsent = len(sentences)
+    first_sent = sentences[0]
+    print("First = ", first_sent)
+    tmp = ''
+
 
 def main() :
     parser = argparse.ArgumentParser()
