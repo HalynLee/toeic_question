@@ -52,40 +52,63 @@ def sentence_scramble(sentences):
 
 
 def get_distractors(word):
-    distractors = []
+    
+    result = []
+    result.append(word)
+
     candidates = get_word_forms(word)
     print(candidates)
     
-    adverb = list(candidates['a'])
-    print(adverb)
-    
-    if adverb :
-        distractors.append(adverb[0])
-    
-    verbs = list(candidates['v'])
-    
-    while len(distractors)< 3 :
-        if verbs :
-            if choice(verbs) not in distractors :
-                distractors.append(choice(verbs))
+    distractors = list(candidates['a'])
+    distractors.extend(list(candidates['v']))
+    distractors.extend(list(candidates['n']))
 
-    return distractors
+    print(distractors)
+    print('=====================')
+    
+    while len(result) < 4  :
+        word = choice(distractors)
+        if word not in result :
+            result.append(word)
+            distractors.remove(word)
+        print(result)
+        
+
+    return result
 
 def part5(sentence) :
+    original_word = None
     candidate_words = []
+    word_type = ('RB')
     AtoD = ['(A)','(B)','(C)','(D)']
+
     text = nltk.word_tokenize(sentence)
     result = nltk.pos_tag(text)
     print(result)
 
     for word in result :
-        if word[1] == 'RB':
+        if word[1] in word_type:
             candidate_words.append(word[0]) 
     
     print('candidate_words :', candidate_words)
-    original_word = candidate_words[-1]
+    for word in candidate_words :
+        dist_num = 0
+        dist = get_word_forms(word)
+        for pos in dist.values() :
+            print(pos)
+            dist_num += len(pos)
+        print('dist_num ->', dist_num)
+        
+        if dist_num > 3:
+            original_word = word
+            break
+    
+    if original_word is None :
+        print('No original_word')
+        return 
+    
     print('original_word :', original_word)
-
+    
     distractors = get_distractors(original_word)
     distractors.append(original_word)
     shuffle(distractors)
